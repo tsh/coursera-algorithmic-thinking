@@ -37,3 +37,23 @@ def bfs_visited(ugraph, start_node):
                 queue.append(ugraph[node])
     return visited
 
+
+def cc_visited(ugraph):
+    """
+    not finished
+    ugraph -> undirected graph
+    Return list of sets with connected components in input graph
+    """
+    remaining_nodes = set(ugraph.keys())
+    cc = set()
+    result = []
+    while remaining_nodes:
+        node = remaining_nodes.pop()
+        visited_nodes = bfs_visited(ugraph, node)
+        # union
+        cc = cc | visited_nodes
+        result.append(cc)
+        remaining_nodes = remaining_nodes - visited_nodes
+    return result
+
+print cc_visited(test_graph)
